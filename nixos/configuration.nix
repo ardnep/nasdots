@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./disko-config.nix
     ./hdd-disko.nix
+    ./samba.nix
   ];
 
   # Use an alternative mirror in China
