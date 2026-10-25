@@ -23,6 +23,9 @@
     lazygit
     zoxide
     gcc
+    eza
+    tmux
+    direnv
   ];
 
   boot.loader.systemd-boot = {
