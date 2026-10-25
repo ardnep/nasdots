@@ -21,6 +21,7 @@
     fd
     unzip
     lazygit
+    zoxide
   ];
 
   boot.loader.systemd-boot = {
