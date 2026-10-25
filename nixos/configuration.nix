@@ -53,8 +53,12 @@
     configurationLimit = 10;
   };
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
+  boot.kernelModules = [ "zfs" ];
 
   networking.hostName = "ardnas";
+  networking.hostId = "62370f7e";
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
 
