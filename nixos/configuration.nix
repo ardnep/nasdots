@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./disko-config.nix
+    ./hdd-disko.nix
   ];
 
   # Use an alternative mirror in China
@@ -56,6 +57,7 @@
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;
   boot.kernelModules = [ "zfs" ];
+  boot.zfs.requestEncryptionCredentials = [ "tank" ];
 
   networking.hostName = "ardnas";
   networking.hostId = "62370f7e";
@@ -100,9 +102,13 @@
   };
 
   services.smartd = {
-      enable = true;
-      autodetect = true;
+    enable = true;
+    autodetect = true;
   };
+
+  systemd.tmpfiles.rules = [
+    "d /srv/nas/files 0700 ardnep users - -"
+  ];
 
   system.stateVersion = "26.05";
 }
