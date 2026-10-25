@@ -20,12 +20,16 @@ bindkey -M vicmd 'j' down-line-or-beginning-search
 
 # Change the shell's directory when leaving Yazi.
 function y() {
-  local tmp="$(mktemp -t yazi-cwd.XXXXXX)" cwd
+  local tmp cwd
+  tmp="$(mktemp -t yazi-cwd.XXXXXX)" || return
+
   yazi "$@" --cwd-file="$tmp"
-  if IFS= read -r -d '' cwd < "$tmp"; then
-    [[ -n "$cwd" && "$cwd" != "$PWD" ]] && builtin cd -- "$cwd"
-  fi
+  cwd="$(cat -- "$tmp")"
   rm -f -- "$tmp"
+
+  if [[ -n "$cwd" && "$cwd" != "$PWD" ]]; then
+    builtin cd -- "$cwd"
+  fi
 }
 
 # Launch Yazi with Ctrl+F and refresh the prompt afterward.

@@ -5,9 +5,25 @@
     ./hardware-configuration.nix
   ];
 
+  # Use an alternative mirror in China
   nix.settings.substituters = [
     "https://mirror.sjtu.edu.cn/nix-channels/store?priority=10"
   ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+  ];
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  time.timeZone = "Asia/Singapore";
 
   environment.systemPackages = with pkgs; [
     vim
@@ -26,6 +42,7 @@
     eza
     tmux
     direnv
+    wget
   ];
 
   boot.loader.systemd-boot = {
@@ -42,11 +59,16 @@
     enable = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-    
+
     ohMyZsh = {
       enable = true;
       theme = "bira";
       plugins = [ "git" "vi-mode" ];
+
+      # Change cursor based on the vim mode you're currently in
+      preLoaded = ''
+        VI_MODE_SET_CURSOR=true
+     '';
     };
   };
 
