@@ -22,6 +22,7 @@
     unzip
     lazygit
     zoxide
+    gcc
   ];
 
   boot.loader.systemd-boot = {
