@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disko-config.nix
   ];
 
   # Use an alternative mirror in China

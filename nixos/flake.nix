@@ -15,9 +15,7 @@
 
       modules = [
         ./configuration.nix
-          disko.nixosModules.disko
-
-          { disko.enableConfig = false; }
+        disko.nixosModules.disko
       ];
     };
   };
