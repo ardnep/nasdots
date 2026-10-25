@@ -13,6 +13,14 @@
     vim
     git
     gh
+    yazi
+    neovim
+    curl
+    tree-sitter
+    ripgrep
+    fd
+    unzip
+    lazygit
   ];
 
   boot.loader.systemd-boot = {
@@ -25,9 +33,22 @@
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
 
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+    
+    ohMyZsh = {
+      enable = true;
+      theme = "bira";
+      plugins = [ "git" "vi-mode" ];
+    };
+  };
+
   users.users.ardnep = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM34h67NEChFTnjwn4YvPNzG6MI7PGu/sVIZFXnDz454"
