@@ -44,6 +44,8 @@
     tmux
     direnv
     wget
+    smartmontools
+    lm_sensors
   ];
 
   boot.loader.systemd-boot = {
@@ -91,6 +93,11 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
     };
+  };
+
+  services.smartd = {
+      enable = true;
+      autodetect = true;
   };
 
   system.stateVersion = "26.05";
