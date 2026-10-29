@@ -18,5 +18,15 @@
         disko.nixosModules.disko
       ];
     };
+
+    packages.x86_64-linux.ugreen-leds =
+      self.nixosConfigurations.ardnas.config.boot.kernelPackages.callPackage
+      ./ugreen-leds/package.nix
+      { };
+
+    packages.x86_64-linux.ugreen-leds-activity =
+      nixpkgs.legacyPackages.x86_64-linux.callPackage
+      ./ugreen-leds/activity-package.nix
+      { };
   };
 }

@@ -6,6 +6,7 @@
     ./disko-config.nix
     ./hdd-disko.nix
     ./samba.nix
+    ./ugreen-leds
   ];
 
   # Use an alternative mirror in China
@@ -48,6 +49,7 @@
     wget
     smartmontools
     lm_sensors
+    i2c-tools
   ];
 
   boot.loader.systemd-boot = {
@@ -57,7 +59,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;
-  boot.kernelModules = [ "zfs" ];
+  boot.kernelModules = [ "zfs" "i2c-dev"];
   boot.zfs.requestEncryptionCredentials = [ "tank" ];
 
   networking.hostName = "ardnas";
@@ -105,6 +107,11 @@
   services.smartd = {
     enable = true;
     autodetect = true;
+  };
+
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
   };
 
   systemd.tmpfiles.rules = [
