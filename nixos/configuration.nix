@@ -50,6 +50,7 @@
     smartmontools
     lm_sensors
     i2c-tools
+    btop
   ];
 
   boot.loader.systemd-boot = {
